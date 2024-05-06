@@ -1,16 +1,29 @@
 package ecom.Models;
 
+import java.util.*;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import ecom.DTO.RestaurantDTO;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class UserModel {
     @Id
@@ -36,57 +49,16 @@ public class UserModel {
      @Column(name = "role")
      private String role;
 
+     @JsonIgnore
+     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+     private List<OrderModel> orders = new ArrayList<>();
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+   @ElementCollection
+     private List<RestaurantDTO> favorites = new ArrayList<>(); 
 
-    public String getFullname() {
-        return fullname;
-    }
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
+     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+     private List<AddressModel> addresses = new ArrayList<>();
 
-    public String getMail() {
-        return mail;
-    }
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
     
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-     
-  
-
 }

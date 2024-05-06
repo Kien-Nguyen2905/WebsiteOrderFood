@@ -1,11 +1,13 @@
 package ecom.DTO;
 
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 
 import java.sql.Date;
 
@@ -19,14 +21,16 @@ public class UserDTO {
      private String fullname;
 
      @NotEmpty(message = "Mail is required")
+     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}")
      private String mail;
 
      @NotEmpty(message = "Password is required")
-     @Min(value = 8, message = "Password must be more than 8 characters")
-     @Max(value = 30, message = "Password must be less than 30 characters ")
+    //  @Min(value = 8, message = "Password must be more than 8 characters")
+    //  @Max(value = 30, message = "Password must be less than 30 characters ")
      private String password;
 
      @NotNull(message = "Phone is required")
+     @Pattern(regexp="(^$|[0-9]{10})")
      private String phone;
 
      @Past(message = "Birthday must be in the past")

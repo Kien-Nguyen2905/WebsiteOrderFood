@@ -1,15 +1,21 @@
 package ecom.Controller;
 
-import org.springframework.web.bind.annotation.RestController;
 
-import ecom.Models.UserModel;
+
+import ecom.DTO.UserDTO;
+import ecom.Helper.ResponseHandler;
 import ecom.Services.UserService;
 
-import java.util.List;
+import jakarta.validation.Valid;
 
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -21,8 +27,15 @@ public class UserController {
  @Autowired
     private  UserService userService;
 
-    @GetMapping("/getAll")
-    public List<UserModel> getAll() {
-        return userService.findAllUser();
+    @PostMapping("signup")
+    public ResponseEntity<Object> signUp(@RequestBody @Valid UserDTO newUser) {
+        
+        return ResponseHandler.success("success", HttpStatus.CREATED, newUser) ;
     }
+    
+ 
+    // @GetMapping("/signup")
+    // public List<UserModel> getAll() {
+    //     return userService.findAllUser();
+    // }
 }

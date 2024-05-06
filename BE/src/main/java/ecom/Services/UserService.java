@@ -16,4 +16,8 @@ public class UserService {
     public List<UserModel> findAllUser() {
       return userRepository.findAll();
     }
+
+    public void signUp(UserModel newUser){
+        
+    } 
 }

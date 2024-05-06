@@ -28,7 +28,7 @@ CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `fullname` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `mail` varchar(50) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `birthday` date NOT NULL,
   `role` varchar(10) NOT NULL,

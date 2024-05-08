@@ -2,16 +2,17 @@ package ecom.DTO;
 
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
+import lombok.Data;
 
 import java.sql.Date;
 
+import ecom.Models.USER_ROLE;
 
+@Data
 public class UserDTO {
 
 
@@ -21,7 +22,7 @@ public class UserDTO {
      private String fullname;
 
      @NotEmpty(message = "Mail is required")
-     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}")
+     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}\\.[a-z]{2}")
      private String mail;
 
      @NotEmpty(message = "Password is required")
@@ -30,17 +31,18 @@ public class UserDTO {
      private String password;
 
      @NotNull(message = "Phone is required")
-     @Pattern(regexp="(^$|[0-9]{10})")
+     @Pattern(regexp="(^$|[0-9]{8,})")
      private String phone;
 
      @Past(message = "Birthday must be in the past")
      private Date birthday;
 
-     private String role;
+     private USER_ROLE role;
 
      
 
-    public UserDTO(int id, String fullname, String mail, String password, String phone, Date birthday, String role) {
+    public UserDTO(int id, String fullname, String mail, String password, String phone, Date birthday, USER_ROLE role) {
+        
         this.id = id;
         this.fullname = fullname;
         this.mail = mail;
@@ -48,6 +50,7 @@ public class UserDTO {
         this.phone = phone;
         this.birthday = birthday;
         this.role = role;
+        
     }
 
     
@@ -91,11 +94,11 @@ public class UserDTO {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-    public String getRole() {
+    public USER_ROLE getRole() {
         return role;
     }
-    public void setRole(String role) {
-        this.role = role;
+    public USER_ROLE setRole(USER_ROLE role) {
+        return this.role = role;
     }
 
      

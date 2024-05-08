@@ -9,7 +9,7 @@ import java.util.*;
 @Embeddable
 public class RestaurantDTO {
 
-    private int id;
+    private Long id;
     private String title;
     private String description;
     

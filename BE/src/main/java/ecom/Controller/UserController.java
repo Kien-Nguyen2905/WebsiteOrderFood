@@ -5,7 +5,6 @@ package ecom.Controller;
 import ecom.DTO.UserDTO;
 import ecom.Helper.ResponseHandler;
 import ecom.Services.UserService;
-
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/user")
-
-
 public class UserController {
  @Autowired
     private  UserService userService;
@@ -30,7 +27,7 @@ public class UserController {
     @PostMapping("signup")
     public ResponseEntity<Object> signUp(@RequestBody @Valid UserDTO newUser) {
         
-        return ResponseHandler.success("success", HttpStatus.CREATED, newUser) ;
+        return ResponseHandler.success("success","success", HttpStatus.CREATED, newUser) ;
     }
     
  

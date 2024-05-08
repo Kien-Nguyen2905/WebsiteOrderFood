@@ -22,14 +22,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "foods")
 public class FoodModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
      private int id;
-
      private String name;
-
      private String description;
-
      private BigDecimal price;
 
      @ManyToOne
@@ -48,7 +44,7 @@ public class FoodModel {
      private boolean isSeasonal;
 
      @ManyToMany
-     private List<IngredientsModel> ingredients = new ArrayList<>();
+     private List<IngredientsItemModel> ingredients = new ArrayList<>();
 
-     private Date createDate; 
+      private Date createDate; 
 }

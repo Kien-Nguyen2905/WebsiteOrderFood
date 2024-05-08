@@ -3,7 +3,6 @@ package ecom.Models;
 import java.math.BigDecimal;
 import java.util.*;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,8 +20,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "orderitems")
 public class OrderItemModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
      private int id;
 
      @ManyToOne
@@ -33,5 +31,5 @@ public class OrderItemModel {
     private BigDecimal totalPrice;
 
     
-    private List<IngredientsModel> ingredients;
+     private List<String> ingredients;
 }

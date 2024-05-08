@@ -3,7 +3,7 @@ package ecom.Controller;
 
 
 import ecom.DTO.UserDTO;
-import ecom.Helper.ResponseHandler;
+import ecom.helper.ResponseHandler;
 import ecom.Services.UserService;
 
 import jakarta.validation.Valid;

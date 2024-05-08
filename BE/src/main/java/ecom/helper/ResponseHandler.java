@@ -1,4 +1,4 @@
-package ecom.Helper;
+package ecom.helper;
 
 import java.util.HashMap;
 

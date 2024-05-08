@@ -1,4 +1,4 @@
-package ecom.Helper;
+package ecom.helper;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

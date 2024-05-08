@@ -2,7 +2,6 @@ package ecom.Models;
 
 import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +12,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.*;
 
 @Entity
@@ -23,8 +21,7 @@ import java.util.*;
 @Table(name = "orders")
 public class OrderModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
      private int id;
 
      @ManyToOne
@@ -34,7 +31,7 @@ public class OrderModel {
      @ManyToOne
     private RestaurantModel restaurant;
 
-    private long totalAmount;
+     private BigDecimal totalAmount;
     private String orderStatus;
     private Date createdAt;
 
@@ -44,7 +41,8 @@ public class OrderModel {
     @OneToMany
     private List<OrderItemModel> items;
      
-      private PaymentModel payment;
+      // private PaymentModel payment;
+
       private int totalItem;
       private BigDecimal totalPrice;
 }

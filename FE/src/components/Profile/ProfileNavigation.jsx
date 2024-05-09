@@ -19,7 +19,7 @@ const menu = [
   { title: "Logout", icon: <LogoutIcon /> },
 ];
 const ProfileNavigation = ({ open, handleClose }) => {
-  const isSmallScreen = useMediaQuery("(max-width:900px)");
+  const isSmallScreen = useMediaQuery("(max-width:1027px)");
   const navigate = useNavigate();
   const handleNavigate = (item) => {
     navigate(`/my-profile/${item?.title.toLowerCase()}`);

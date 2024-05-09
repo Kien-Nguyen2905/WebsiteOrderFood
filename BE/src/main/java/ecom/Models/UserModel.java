@@ -25,35 +25,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class UserModel {
+public class UserModel {    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
      private int id;
-
-     @Column(name = "fullname")
      private String fullname;
-
-     @Column(name = "mail")
      private String mail;
-
-     @Column(name = "password")
      private String password;
-
-     @Column(name = "phone")
      private String phone;
-
-     @Column(name = "birthday")
      private Date birthday;
-
-     @Column(name = "role")
-     private String role;
+     private USER_ROLE role ;
 
      @JsonIgnore
      @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
      private List<OrderModel> orders = new ArrayList<>();
 
-   @ElementCollection
+    @ElementCollection
      private List<RestaurantDTO> favorites = new ArrayList<>(); 
 
      @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

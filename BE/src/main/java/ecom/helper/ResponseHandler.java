@@ -1,4 +1,4 @@
-package ecom.Helper;
+package ecom.helper;
 
 import java.util.HashMap;
 
@@ -9,10 +9,15 @@ import org.springframework.http.ResponseEntity;
 public class ResponseHandler {
 
     public static ResponseEntity<Object> success(
-            String message, HttpStatus httpStatus, Object data) {
+            String status,
+            String message,
+            HttpStatus httpStatus,
+            Object data) {
 
         Map<String, Object> response = new HashMap<>();
 
+        
+        response.put("status", status);
         response.put("message", message);
         response.put("httpStatus", httpStatus);
         response.put("data", data);

@@ -1,4 +1,4 @@
-package ecom.Helper;
+package ecom.helper;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

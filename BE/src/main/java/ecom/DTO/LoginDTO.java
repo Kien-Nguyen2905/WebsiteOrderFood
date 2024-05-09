@@ -8,8 +8,8 @@ import lombok.Data;
 
 @Data
 public class LoginDTO {
-   @NotBlank(message = "Fullname is required")
-   @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}")
+   @NotBlank(message = "Mail is required")
+   @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}" ,  message = "Error mail type")
     private String mail;
 
    @NotBlank(message = "Password is required")

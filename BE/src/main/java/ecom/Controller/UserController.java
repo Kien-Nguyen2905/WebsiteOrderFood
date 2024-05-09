@@ -3,7 +3,7 @@ package ecom.Controller;
 
 
 import ecom.DTO.UserDTO;
-import ecom.Helper.ResponseHandler;
+import ecom.Helper.Handler.ResponseHandler;
 import ecom.Services.UserService;
 import jakarta.validation.Valid;
 
@@ -27,7 +27,7 @@ public class UserController {
     @PostMapping("signup")
     public ResponseEntity<Object> signUp(@RequestBody @Valid UserDTO newUser) {
         
-        return ResponseHandler.success("success","success", HttpStatus.CREATED, newUser) ;
+        return ResponseHandler.success("success", HttpStatus.CREATED, newUser) ;
     }
     
  

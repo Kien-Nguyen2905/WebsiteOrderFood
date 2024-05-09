@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import ecom.Helper.Handler.Exceptions.NotFoundException;
 import ecom.Models.USER_ROLE;
 import ecom.Models.UserModel;
 import ecom.Repositories.UserRepository;
@@ -26,7 +28,7 @@ public class CustomerUserService implements UserDetailsService {
         
         UserModel userModel = userRepository.findByMail(username);
         if (userModel == null) {
-            throw new UsernameNotFoundException("User not found with mail "+username);
+            throw new NotFoundException("User not found with mail: "+username);
         }
 
         USER_ROLE role =userModel.getRole();

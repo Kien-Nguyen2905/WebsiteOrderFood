@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../components/Home/Home";
 import Cart from "../components/Cart/Cart";
 import Profile from "../components/Profile/Profile";
+import Auth from "../components/Auth/Auth";
 const CustomerRoute = () => {
   return (
     <div>
@@ -15,6 +16,7 @@ const CustomerRoute = () => {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/my-profile/*" element={<Profile />}></Route>
       </Routes>
+      <Auth/>
     </div>
   );
 };

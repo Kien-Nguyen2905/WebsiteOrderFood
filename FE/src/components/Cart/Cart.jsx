@@ -8,7 +8,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 // import * as Yup from "yup"
 
 const items = [1, 1]
-const style = {
+export const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -107,8 +107,9 @@ const Cart = () => {
                                         as={TextField}
                                         name="streetAddress"
                                         label="Street Address"
-                                        fullWidth variant="outlined"
-                                        error={!ErrorMessage("Street address")}
+                                        fullWidth
+                                        variant="outlined"
+                                    // error={!ErrorMessage("Street address")}
                                     // helperText={
                                     //     <ErrorMessage>
                                     //         {(msg) => <span className="text-red-600">{msg}</span>}
@@ -122,8 +123,9 @@ const Cart = () => {
                                         as={TextField}
                                         name="state"
                                         label="State"
-                                        fullWidth variant="outlined"
-                                        error={!ErrorMessage("State")}
+                                        fullWidth
+                                        variant="outlined"
+                                    // error={!ErrorMessage("State")}
                                     // helperText={
                                     //     <ErrorMessage>
                                     //         {(msg) => <span className="text-red-600">{msg}</span>}
@@ -137,8 +139,9 @@ const Cart = () => {
                                         as={TextField}
                                         name="city"
                                         label="City"
-                                        fullWidth variant="outlined"
-                                        error={!ErrorMessage("City")}
+                                        fullWidth
+                                        variant="outlined"
+                                    // error={!ErrorMessage("City")}
                                     // helperText={
                                     //     <ErrorMessage>
                                     //         {(msg) => <span className="text-red-600">{msg}</span>}
@@ -152,8 +155,9 @@ const Cart = () => {
                                         as={TextField}
                                         name="pincode"
                                         label="Pincode"
-                                        fullWidth variant="outlined"
-                                        error={!ErrorMessage("Pincode")}
+                                        fullWidth
+                                        variant="outlined"
+                                    // error={!ErrorMessage("Pincode")}
                                     // helperText={
                                     //     <ErrorMessage>
                                     //         {(msg) => <span className="text-red-600">{msg}</span>}

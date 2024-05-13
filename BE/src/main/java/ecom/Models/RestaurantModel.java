@@ -4,6 +4,8 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import ecom.DTO.ContactInfomationDTO;
+
 import java.time.*;
 
 import jakarta.persistence.CascadeType;
@@ -47,7 +49,7 @@ public class RestaurantModel {
      private AddressModel address;
 
       @Embedded
-      private ContactInfomationModel ContactInfomation;
+      private ContactInfomationDTO contact;
 
      private String openingHours;
      
@@ -58,7 +60,7 @@ public class RestaurantModel {
   @Column(length = 1000)
   private List<String> images;
 
-  private LocalDateTime registrationDate;
+  private LocalDateTime registrationDate ;
 
   private boolean open;
 

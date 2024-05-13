@@ -1,4 +1,4 @@
-package ecom.DTO;
+package ecom.DTO.Auth;
 
 import ecom.Models.USER_ROLE;
 import lombok.Data;

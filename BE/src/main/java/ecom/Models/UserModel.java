@@ -35,7 +35,7 @@ public class UserModel {
      private String password;
      private String phone;
      private Date birthday;
-     private USER_ROLE role ;
+     private USER_ROLE role;
 
      @JsonIgnore
      @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")

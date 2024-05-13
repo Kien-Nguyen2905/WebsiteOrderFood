@@ -1,9 +1,9 @@
 package ecom.Models;
 
 public enum USER_ROLE {
-ROLE_CUSTOMER,
+CUSTOMER,
 
-ROLE_RESTAURANT_OWNER,
+RESTAURANT_OWNER,
 
 ADMIN
 }

@@ -17,6 +17,10 @@ import lombok.NoArgsConstructor;
 public class AddressModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    // @Column(name = "id")
      private int id;
+     private String city;
+     private String district;
+     private String ward;
+     private String street;
+     private String number;
 }

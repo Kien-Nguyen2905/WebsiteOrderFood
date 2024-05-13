@@ -22,8 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
 
 public class JwtTokenValidator extends OncePerRequestFilter {
-
-    @SuppressWarnings("null")
+   
     @Override
     protected void doFilterInternal(HttpServletRequest request,
             HttpServletResponse response,

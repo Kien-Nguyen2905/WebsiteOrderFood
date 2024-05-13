@@ -22,7 +22,6 @@ public class JwtProvider {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
         String roles = populateAuthorities(authorities);
-
         String jwt = Jwts.builder().setIssuedAt(new Date()).setExpiration((new Date(new Date().getTime()+86400000)))
                                 .claim("mail",authentication.getName())
                                 .claim("authorities",roles)

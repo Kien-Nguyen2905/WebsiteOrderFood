@@ -2,7 +2,6 @@ package ecom.Services;
 
 import java.util.*;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,12 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ecom.Configs.JWT.JwtProvider;
-import ecom.DTO.AuthDTO;
-import ecom.DTO.LoginDTO;
-import ecom.DTO.UserDTO;
-import ecom.Helper.Handler.Exceptions.BadRequestException;
+import ecom.DTO.Auth.AuthDTO;
+import ecom.DTO.Auth.LoginDTO;
+
 import ecom.Helper.Handler.Exceptions.ConflictException;
-import ecom.Helper.Handler.Exceptions.NotFoundException;
+
 import ecom.Helper.Handler.Exceptions.UnauthorizedException;
 import ecom.Models.CartModel;
 import ecom.Models.USER_ROLE;
@@ -30,20 +28,21 @@ public class AuthService {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private CartRepository cartRepository;
+
     @Autowired
     private JwtProvider JwtProvider;
+    
     @Autowired
     private CustomerUserService customerUserService;
 
-    public AuthDTO register(UserDTO user) throws Exception {
+    public AuthDTO register(UserModel user) throws Exception {
 
-        try {
             boolean findUser = userRepository.findByEmailOrPhone(user.getMail(), user.getPhone());
 
             if (findUser == true) {
@@ -54,13 +53,11 @@ public class AuthService {
             String passWordEncoded = passwordEncoder.encode(user.getPassword());
             user.setPassword(passWordEncoded);
 
-            // mapper userDTO to userModel
-            UserModel mapUser = modelMapper.map(user, UserModel.class);
-
             // save user
-            UserModel newUser = userRepository.save(mapUser);
+            UserModel savedUser = userRepository.save(user);
+
             CartModel cart = new CartModel();
-            cart.setCustomer(newUser);
+            cart.setCustomer(savedUser);
             cartRepository.save(cart);
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword());
@@ -72,9 +69,6 @@ public class AuthService {
             authResponse.setRole(user.getRole());
 
             return authResponse;
-        } catch (Exception e) {
-            throw new BadRequestException(e.getMessage());
-        }
     }
 
     public AuthDTO LoginInByMail(LoginDTO login) throws Exception {

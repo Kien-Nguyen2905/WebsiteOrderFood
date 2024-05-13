@@ -29,7 +29,7 @@ public class AppConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests( Authorize -> Authorize
-                    .requestMatchers("api/admin/**").hasAnyRole("RESTAURANT_OWNER", "ADMIN")
+                    .requestMatchers("api/admin/**").hasAnyAuthority("RESTAURANT_OWNER")
                     .requestMatchers("api/**").authenticated()
                     .anyRequest().permitAll())
                 .addFilterBefore( new JwtTokenValidator(), BasicAuthenticationFilter.class)
@@ -65,7 +65,7 @@ public class AppConfig {
         return  new BCryptPasswordEncoder();
     }
 
-    //config automapper 
+     //config automapper
     @Bean(name = "ModelMapper")
     public ModelMapper modelMapper() {
         return new ModelMapper();

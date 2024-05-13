@@ -1,4 +1,4 @@
-package ecom.Controller;
+package ecom.Controller.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,10 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ecom.DTO.AuthDTO;
-import ecom.DTO.LoginDTO;
-import ecom.DTO.UserDTO;
+
+import ecom.DTO.Auth.AuthDTO;
+import ecom.DTO.Auth.LoginDTO;
 import ecom.Helper.Handler.ResponseHandler;
+import ecom.Models.UserModel;
 import ecom.Services.AuthService;
 import jakarta.validation.Valid;
 
@@ -22,7 +23,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<Object> register(@RequestBody @Valid UserDTO User) throws Exception {
+    public ResponseEntity<Object> register(@RequestBody @Valid UserModel User) throws Exception {
 
             AuthDTO authResponse = authService.register(User);
             return ResponseHandler.success("Register success", HttpStatus.CREATED, authResponse);

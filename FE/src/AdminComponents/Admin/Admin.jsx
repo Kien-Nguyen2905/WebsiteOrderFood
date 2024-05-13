@@ -1,7 +1,6 @@
 import React from "react";
 import AdminSidebar from "./AdminSidebar";
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "../Dashboard/Dashboard";
 import Orders from "../Orders/Orders";
 import Menu from "../Menu/Menu";
 import FoodCategory from "../FoodCategory/FoodCategory";
@@ -9,6 +8,7 @@ import Ingredients from "../Ingredients/Ingredients";
 import Events from "../Events/Events";
 import RestaurantDashboard from "../Dashboard/Dashboard";
 import RestaurantDetails from "./RestaurantDetails";
+import CreateMenuForm from "../Menu/CreateMenuForm";
 
 const Admin = () => {
   const handleClose = () => {};
@@ -27,6 +27,7 @@ const Admin = () => {
             <Route path="/ingredients" element={<Ingredients />}></Route>
             <Route path="/events" element={<Events />}></Route>
             <Route path="/details" element={<RestaurantDetails />}></Route>
+            <Route path="/add-menu" element={<CreateMenuForm />}></Route>
           </Routes>
         </div>
       </div>

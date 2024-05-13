@@ -34,7 +34,7 @@ const AdminSidebar = ({ handleClose }) => {
   return (
     <div>
       <Drawer
-        variant={false ? "temporary" : "permanent"}
+        variant={isSmallScreen ? "temporary" : "permanent"}
         // onClose={handleClose}
         open={false ? open : true}
         anchor="left"

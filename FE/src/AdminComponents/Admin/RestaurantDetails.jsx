@@ -141,7 +141,7 @@ const RestaurantDetails = () => {
                 </div>
                 <div className="flex">
                   <p className="w-48">Social</p>
-                  <p className="flex items-center gap-5 pb-3 text-gray-400">
+                  <p className="flex items-center gap-2 pb-3 text-gray-400">
                     <span className="pr-5">-</span>
                     <a href="/">
                       <InstagramIcon sx={{ fontSize: "3rem" }}></InstagramIcon>

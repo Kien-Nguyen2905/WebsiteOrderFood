@@ -30,11 +30,10 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
      private int id;
-     private String fullname;
-     private String mail;
+     private String fullName;
+     private String email;
      private String password;
      private String phone;
-     private Date birthday;
      private USER_ROLE role;
 
      @JsonIgnore
@@ -45,7 +44,7 @@ public class UserModel {
      private List<RestaurantDTO> favorites = new ArrayList<>(); 
 
      @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-     private List<AddressModel> addresses = new ArrayList<>();
+     private List<AddressModel> addresses  = new ArrayList<>();
 
 
     

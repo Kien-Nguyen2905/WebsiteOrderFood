@@ -1,7 +1,6 @@
-package ecom.Services;
+package ecom.Services.User;
 
 import java.util.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,9 +12,7 @@ import org.springframework.stereotype.Service;
 import ecom.Configs.JWT.JwtProvider;
 import ecom.DTO.Auth.AuthDTO;
 import ecom.DTO.Auth.LoginDTO;
-
 import ecom.Helper.Handler.Exceptions.ConflictException;
-
 import ecom.Helper.Handler.Exceptions.UnauthorizedException;
 import ecom.Models.CartModel;
 import ecom.Models.USER_ROLE;
@@ -43,24 +40,28 @@ public class AuthService {
 
     public AuthDTO register(UserModel user) throws Exception {
 
-            boolean findUser = userRepository.findByEmailOrPhone(user.getMail(), user.getPhone());
-
-            if (findUser == true) {
-                throw new ConflictException("Mail or Phone is already used with another account");
+        //Get email register
+        String email= user.getEmail();
+            
+        UserModel findUser = userRepository.findByEmail(email);
+        System.out.println(findUser);
+            if (findUser != null) {
+                throw new ConflictException("Mail is already used with another account");
             }
 
-            // password encoder
+            // Password encoder
             String passWordEncoded = passwordEncoder.encode(user.getPassword());
             user.setPassword(passWordEncoded);
 
             // save user
             UserModel savedUser = userRepository.save(user);
+            
 
             CartModel cart = new CartModel();
             cart.setCustomer(savedUser);
             cartRepository.save(cart);
 
-            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword());
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = JwtProvider.generateToken(authentication);
 
@@ -71,24 +72,25 @@ public class AuthService {
             return authResponse;
     }
 
-    public AuthDTO LoginInByMail(LoginDTO login) throws Exception {
-            Authentication authentication = authentication(login.getMail(), login.getPassword());
+    public AuthDTO LoginInByEmail(LoginDTO login) throws Exception {
+            Authentication authentication = authentication(login.getEmail(), login.getPassword());
 
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             String role = authorities.isEmpty() ? null : authorities.iterator().next().getAuthority();
 
-            // generate token
+            // Generate token
             String jwt = JwtProvider.generateToken(authentication);
 
             AuthDTO authResponse = new AuthDTO();
             authResponse.setJwt(jwt);
             authResponse.setRole(USER_ROLE.valueOf(role));
+
             return authResponse;
     }
 
-    public Authentication authentication(String mail, String password) {
+    public Authentication authentication(String email, String password) {
 
-        UserDetails userDetails = customerUserService.loadUserByUsername(mail);
+        UserDetails userDetails = customerUserService.loadUserByUsername(email);
 
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new UnauthorizedException("Password incorrect");

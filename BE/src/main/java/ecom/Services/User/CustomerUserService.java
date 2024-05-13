@@ -1,4 +1,4 @@
-package ecom.Services;
+package ecom.Services.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,18 +24,21 @@ public class CustomerUserService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         
-        UserModel userModel = userRepository.findByMail(username);
-        if (userModel == null) {
-            throw new NotFoundException("User not found with mail: "+username);
-        }
+        //Find user by email
+        UserModel findUser = userRepository.findByEmail(email);
 
-        USER_ROLE role =userModel.getRole();
+        if (findUser == null) {
+            throw new NotFoundException("User not found with mail: "+ email);
+        }
+        
+        //Get Role User
+        USER_ROLE role =findUser.getRole();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(role.toString()));
-        return new User(userModel.getMail(), userModel.getPassword(), authorities);
+        return new User(findUser.getEmail(), findUser.getPassword(), authorities);
         
     }
 

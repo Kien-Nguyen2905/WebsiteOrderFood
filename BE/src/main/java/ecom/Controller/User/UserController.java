@@ -22,14 +22,14 @@ public class UserController {
     @Autowired
     private  UserService userService;
 
+
+    // Get Profile User
     @GetMapping("/user")
     public ResponseEntity<Object> signUp(@RequestHeader("Authorization")  String jwt) throws Exception {
-        if (jwt != null) {
-            jwt = jwt.substring(7);
-        }
-        UserModel user = userService.findByJwtToken(jwt);
 
-        return ResponseHandler.success("success", HttpStatus.OK, user) ;
+        UserModel userResponse = userService.findByJwtToken(jwt);
+
+        return ResponseHandler.success("success", HttpStatus.OK, userResponse) ;
     }
     
 }

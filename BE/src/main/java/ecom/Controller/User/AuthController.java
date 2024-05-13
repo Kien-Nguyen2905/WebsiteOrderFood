@@ -11,7 +11,7 @@ import ecom.DTO.Auth.AuthDTO;
 import ecom.DTO.Auth.LoginDTO;
 import ecom.Helper.Handler.ResponseHandler;
 import ecom.Models.UserModel;
-import ecom.Services.AuthService;
+import ecom.Services.User.AuthService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,17 +22,21 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    // Register User in Customer or Restaurant Owner
     @PostMapping("/register")
-    public ResponseEntity<Object> register(@RequestBody @Valid UserModel User) throws Exception {
+    public ResponseEntity<Object> register(@RequestBody @Valid UserModel newUser) throws Exception {
 
-            AuthDTO authResponse = authService.register(User);
+            AuthDTO authResponse = authService.register(newUser);
+
             return ResponseHandler.success("Register success", HttpStatus.CREATED, authResponse);
     }
 
+    //Login User in Customer or Restaurant Owner
     @PostMapping("/login")
     public ResponseEntity<Object> logIn(@RequestBody @Valid LoginDTO login) throws Exception {
 
-        AuthDTO authResponse = authService.LoginInByMail(login);
+        AuthDTO authResponse = authService.LoginInByEmail(login);
+        
         return ResponseHandler.success("Login success", HttpStatus.OK, authResponse);
 
     }

@@ -33,36 +33,35 @@ public class RestaurantController {
     @GetMapping("/search")
     public ResponseEntity<Object> searchRestaurants(@RequestHeader("Authorization") String jwt, @RequestParam(name = "keyword") String keyword) {
 
-        List<RestaurantModel> restaurants = restaurantService.search(keyword);
-        return ResponseHandler.success("", HttpStatus.OK, restaurants);
+        List<RestaurantModel> restaurantsResponse = restaurantService.search(keyword);
+
+        return ResponseHandler.success("", HttpStatus.OK, restaurantsResponse);
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<Object> getAllRestaurant() {
 
+        List<RestaurantModel> restaurantsResponse = restaurantService.getAll();
 
-        List<RestaurantModel> restaurants = restaurantService.getAll();
-        return ResponseHandler.success("", HttpStatus.OK, restaurants);
+        return ResponseHandler.success("", HttpStatus.OK, restaurantsResponse);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Object> getRestaurantById(@RequestHeader("Authorization") String jwt, @PathVariable int id) throws Exception {
-        RestaurantModel restaurantModel = restaurantService.findById(id);
+
+        RestaurantModel restaurantResponse = restaurantService.findById(id);
       
-        return ResponseHandler.success("", HttpStatus.OK, restaurantModel);
+        return ResponseHandler.success("", HttpStatus.OK, restaurantResponse);
     }
 
     @PutMapping("/add-favorites/{id}")
     public ResponseEntity<Object> addFavorites( @RequestHeader("Authorization") String jwt,@PathVariable int id) throws Exception {
        
-        if (jwt != null) {
-            jwt = jwt.substring(7);
-        }   
-        
-        UserModel user = userService.findByJwtToken(jwt);
-        RestaurantDTO restaurant = restaurantService.addToFavorites(id, user);
+        UserModel findUser = userService.findByJwtToken(jwt);
+
+        RestaurantDTO restaurantResponse = restaurantService.addToFavorites(id, findUser);
 
       
-        return ResponseHandler.success("Add favorites succes", HttpStatus.CREATED, restaurant);
+        return ResponseHandler.success("Add favorites succes", HttpStatus.CREATED, restaurantResponse);
     }
 }

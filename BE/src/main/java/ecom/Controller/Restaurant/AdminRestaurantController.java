@@ -29,63 +29,47 @@ public class AdminRestaurantController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("")
-    public ResponseEntity<Object> createRestaurant(@RequestBody RestaurantModel newRestaurant,@RequestHeader("Authorization") String jwt) {
-
-        if (jwt != null) {
-            jwt = jwt.substring(7);
-        }
+    @PostMapping
+    public ResponseEntity<Object> createRestaurant(@RequestBody RestaurantModel newRestaurant, @RequestHeader("Authorization") String jwt) {
 
         UserModel user = userService.findByJwtToken(jwt);
 
-        RestaurantModel restaurant = restaurantService.create(newRestaurant, user);
-        return ResponseHandler.success("Restaurant created", HttpStatus.CREATED, restaurant);
+        RestaurantModel restaurantResponse = restaurantService.create(newRestaurant, user);
+
+        return ResponseHandler.success("Restaurant created", HttpStatus.CREATED, restaurantResponse);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Object> updateRestaurant(@RequestBody RestaurantModel restaurant, @RequestHeader("Authorization") String jwt,
-                                                    @PathVariable int id)  throws Exception {
+    public ResponseEntity<Object> updateRestaurant(@RequestBody RestaurantModel restaurant, @RequestHeader("Authorization") String jwt, @PathVariable int id)  throws Exception {
+        
+        RestaurantModel restaurantResponse = restaurantService.update(id, restaurant);
 
-        if (jwt != null) {
-            jwt = jwt.substring(7);
-        }
-
-        RestaurantModel updatedRestaurant = restaurantService.update(id, restaurant);
-        return ResponseHandler.success("Restaurant updated", HttpStatus.OK, updatedRestaurant);
+        return ResponseHandler.success("Restaurant updated", HttpStatus.OK, restaurantResponse);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteRestaurant( @RequestHeader("Authorization") String jwt, @PathVariable int id) throws Exception {
-
-        if (jwt != null) {
-            jwt = jwt.substring(7);
-        }
-
+    public ResponseEntity<Object> deleteRestaurantById( @RequestHeader("Authorization") String jwt, @PathVariable int id) throws Exception {
 
          restaurantService.detele(id);
+
         return ResponseHandler.success("Restaurant deleted", HttpStatus.OK,null);
     }
 
     @PutMapping("/status/{id}")
     public ResponseEntity<Object> updateRestaurantStatus( @RequestHeader("Authorization") String jwt,@PathVariable int id)  throws Exception {
-System.out.println(id);
-        if (jwt != null) {
-            jwt = jwt.substring(7);
-        }
+       
+        RestaurantModel restaurantResponse = restaurantService.updateRestaurantStatus(id);
 
-        RestaurantModel updatedRestaurant = restaurantService.updateRestaurantStatus(id);
-        return ResponseHandler.success("Restaurant status updated", HttpStatus.OK, updatedRestaurant);
+        return ResponseHandler.success("Restaurant status updated", HttpStatus.OK, restaurantResponse);
     }
+    
     @GetMapping("/user")
     public ResponseEntity<Object> getRestaurantByOwnerId( @RequestHeader("Authorization") String jwt)  throws Exception {
 
-        if (jwt != null) {
-            jwt = jwt.substring(7);
-        }
         UserModel user = userService.findByJwtToken(jwt);
 
-        RestaurantModel Restaurant = restaurantService.findByUserId(user.getId());
+        RestaurantModel restaurantResponse = restaurantService.findByUserId(user.getId());
         
-        return ResponseHandler.success("", HttpStatus.OK, Restaurant);
+        return ResponseHandler.success("", HttpStatus.OK, restaurantResponse);
     }
 }

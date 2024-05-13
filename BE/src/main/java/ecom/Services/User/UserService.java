@@ -18,21 +18,29 @@ public class UserService implements UserServiceImp {
     @Autowired
     private JwtProvider jwtProvider;
 
+    //Get all user
     @Override
     public List<UserModel> findAllUser() {
       return userRepository.findAll();
     }
 
+    //Get user by jwt token
   @Override
     public  UserModel findByJwtToken(String jwt) {
+      
+      if (jwt != null) {
+        jwt = jwt.substring(7);
+    }
+
        String mail = jwtProvider.getMailFromJwtToken(jwt);
-       UserModel user = findByMail(mail);
+       UserModel user = findByEmail(mail);
        return user;
     }
 
+   //Get user by email
   @Override
-  public UserModel findByMail(String mail) {
-    UserModel user = userRepository.findByMail(mail);
+  public UserModel findByEmail(String email) {
+    UserModel user = userRepository.findByEmail(email);
 
     if (user == null) {
         throw new NotFoundException("User Not Found");

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@RequestMapping("api/restaurant")
+@RequestMapping("api/restaurants")
 public class RestaurantController {
    @Autowired
     private RestaurantService restaurantService;
